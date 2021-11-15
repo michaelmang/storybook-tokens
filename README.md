@@ -1,114 +1,31 @@
-# Storybook Addon Kit
+# Storybook Tokens
 
-Simplify the creation of Storybook addons
+Simplify the creation of Style Dictionary-friendly tokens
 
-- 📝 Live-editing in development
-- ⚛️ React/JSX support
-- 📦 Transpiling and bundling with Babel
-- 🏷 Plugin metadata
-- 🚢 Release management with [Auto](https://github.com/intuit/auto)
-- 🧺 Boilerplate and sample code
-- 🛄 ESM support
-- 🛂 TypeScript by default with option to eject to JS
+⚛️ React/JSX support
 
-## Getting Started
+Here's a potential workflow for using this addon:
 
-Click the **Use this template** button to get started.
+- 📝 Create stories in Storybook
+- 🧺 Use addon to extract raw design tokens from each story
+- 🏷 Copy raw design tokens to Style Dictionary
+- 📦 Format design tokens in Style Dictionary
+- 🚢 Release formatted design tokens for others to consume
 
-![](https://user-images.githubusercontent.com/321738/125058439-8d9ef880-e0aa-11eb-9211-e6d7be812959.gif)
+## Why?
+1) For documentation (without having to jump back and forth between Style Dictionary).
 
-Clone your repository and install dependencies.
+2) For allowing teams to build UI components as usual, copy and paste the underlying, agnostic tokens into a tool like Style Dictionary, and then format them for sharing with other teams.
 
-```sh
-yarn
-```
+This flips the traditional approach to a design tokens pipeline. Instead of generating your tokens first, and then consuming them in your UI library, you can create the UI library first and then extract the tokens.
 
-### Development scripts
+In a word, you can reverse engineer a design tokens pipeline.
 
-- `yarn start` runs babel in watch mode and starts Storybook
-- `yarn build` build and package your addon code
+This may not be an ideal use case or best practice, but it could be helpful in SOME cases (i.e. a team that only has a UI component library, no formal design system team, and wants to quickly get a Style Dictionary pipeline going.)
 
-### Switch from TypeScript to JavaScript
+## How Do I Use This?
+Click the "paintbrush" in the toolbar labeled "Extract Tokens".
 
-Don't want to use TypeScript? We offer a handy eject command: `yarn eject-ts`
+This will display the extracted design that you can copy and paste into Style Dictionary:
 
-This will convert all code to JS. It is a destructive process, so we recommended running this before you start writing any code.
-
-## What's included?
-
-![Demo](https://user-images.githubusercontent.com/42671/107857205-e7044380-6dfa-11eb-8718-ad02e3ba1a3f.gif)
-
-The addon code lives in `src`. It demonstrates all core addon related concepts. The three [UI paradigms](https://storybook.js.org/docs/react/addons/addon-types#ui-based-addons)
-
-- `src/Tool.js`
-- `src/Panel.js`
-- `src/Tab.js`
-
-Which, along with the addon itself, are registered in `src/preset/manager.js`.
-
-Managing State and interacting with a story:
-
-- `src/withGlobals.js` & `src/Tool.js` demonstrates how to use `useGlobals` to manage global state and modify the contents of a Story.
-- `src/withRoundTrip.js` & `src/Panel.js` demonstrates two-way communication using channels.
-- `src/Tab.js` demonstrates how to use `useParameter` to access the current story's parameters.
-
-Your addon might use one or more of these patterns. Feel free to delete unused code. Update `src/preset/manager.js` and `src/preset/preview.js` accordingly.
-
-Lastly, configure you addon name in `src/constants.js`.
-
-### Metadata
-
-Storybook addons are listed in the [catalog](https://storybook.js.org/addons) and distributed via npm. The catalog is populated by querying npm's registry for Storybook-specific metadata in `package.json`. This project has been configured with sample data. Learn more about available options in the [Addon metadata docs](https://storybook.js.org/docs/react/addons/addon-catalog#addon-metadata).
-
-## Release Management
-
-### Setup
-
-This project is configured to use [auto](https://github.com/intuit/auto) for release management. It generates a changelog and pushes it to both GitHub and npm. Therefore, you need to configure access to both:
-
-- [`NPM_TOKEN`](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-access-tokens) Create a token with both _Read and Publish_ permissions.
-- [`GH_TOKEN`](https://github.com/settings/tokens) Create a token with the `repo` scope.
-
-Then open your `package.json` and edit the following fields:
-
-- `name`
-- `author`
-- `repository`
-
-#### Local
-
-To use `auto` locally create a `.env` file at the root of your project and add your tokens to it:
-
-```bash
-GH_TOKEN=<value you just got from GitHub>
-NPM_TOKEN=<value you just got from npm>
-```
-
-Lastly, **create labels on GitHub**. You’ll use these labels in the future when making changes to the package.
-
-```bash
-npx auto create-labels
-```
-
-If you check on GitHub, you’ll now see a set of labels that `auto` would like you to use. Use these to tag future pull requests.
-
-#### GitHub Actions
-
-This template comes with GitHub actions already set up to publish your addon anytime someone pushes to your repository.
-
-Go to `Settings > Secrets`, click `New repository secret`, and add your `NPM_TOKEN`.
-
-### Creating a release
-
-To create a release locally you can run the following command, otherwise the GitHub action will make the release for you.
-
-```sh
-yarn release
-```
-
-That will:
-
-- Build and package the addon code
-- Bump the version
-- Push a release to GitHub and npm
-- Push a changelog to GitHub
+![screenshot](https://res.cloudinary.com/dpzpn0xkz/image/upload/v1637018020/rbe43rdjsrg7ijn698ya.png)
