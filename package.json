@@ -48,7 +48,7 @@
     "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.3.6",
-    "auto": "^10.3.0",
+    "auto": "^10.32.2",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
     "concurrently": "^6.2.0",
