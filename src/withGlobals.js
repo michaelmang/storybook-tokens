@@ -1,4 +1,18 @@
 import { useEffect, useGlobals } from "@storybook/addons";
+import extractCSS from 'component-css-extractor';
+import { parse } from 'css';
+
+function normalizeForStyleDictionary(context, tokens) {
+  const variant = context.kind.split('/')[1].toLowerCase();
+  return {
+    component: {
+      [variant]: {
+        [context.name.toLowerCase()]: tokens,
+      },
+    },
+  }
+}
+
 export const withGlobals = (StoryFn, context) => {
   const [{ myAddon }] = useGlobals(); // Is the addon being used in the docs panel
 
@@ -9,7 +23,7 @@ export const withGlobals = (StoryFn, context) => {
     const selectorId = isInDocs
       ? `#anchor--${context.id} .docs-story`
       : `#root`;
-    displayToolState(selectorId, {
+    displayToolState(selectorId, context, {
       myAddon,
       isInDocs,
     });
@@ -17,9 +31,17 @@ export const withGlobals = (StoryFn, context) => {
   return StoryFn();
 };
 
-function displayToolState(selector, state) {
+function displayToolState(selector, context, state) {
   const rootElement = document.querySelector(selector);
   let preElement = rootElement.querySelector("pre");
+
+  if (!state.myAddon) {
+    if (preElement) {
+      rootElement.removeChild(preElement);
+    }
+
+    return null;
+  }
 
   if (!preElement) {
     preElement = document.createElement("pre");
@@ -27,13 +49,15 @@ function displayToolState(selector, state) {
     preElement.style.setProperty("padding", "1rem");
     preElement.style.setProperty("background-color", "#eee");
     preElement.style.setProperty("border-radius", "3px");
-    preElement.style.setProperty("max-width", "600px");
     rootElement.appendChild(preElement);
   }
 
-  preElement.innerText = `This snippet is injected by the withGlobals decorator.
-It updates as the user interacts with the ⚡ tool in the toolbar above.
+  const styles = extractCSS(rootElement);
+  const tokens = Object.fromEntries(parse(styles, {}).stylesheet.rules.flatMap(rule => {
+    return rule.declarations.map(declaration => {
+      return [declaration.property, { value: declaration.value }];;
+    });
+  }));
 
-${JSON.stringify(state, null, 2)}
-`;
+  preElement.innerText = JSON.stringify(normalizeForStyleDictionary(context, tokens), null, 2);
 }
