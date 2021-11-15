@@ -1,28 +1,23 @@
-import { StoryFn as StoryFunction, StoryContext } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
+export const withGlobals = (StoryFn, context) => {
+  const [{ myAddon }] = useGlobals(); // Is the addon being used in the docs panel
 
-export const withGlobals = (StoryFn: StoryFunction, context: StoryContext) => {
-  const [{ myAddon }] = useGlobals();
-  // Is the addon being used in the docs panel
   const isInDocs = context.viewMode === "docs";
-
   useEffect(() => {
     // Execute your side effect here
     // For example, to manipulate the contents of the preview
     const selectorId = isInDocs
       ? `#anchor--${context.id} .docs-story`
       : `#root`;
-
     displayToolState(selectorId, {
       myAddon,
       isInDocs,
     });
   }, [myAddon]);
-
   return StoryFn();
 };
 
-function displayToolState(selector: string, state: any) {
+function displayToolState(selector, state) {
   const rootElement = document.querySelector(selector);
   let preElement = rootElement.querySelector("pre");
 

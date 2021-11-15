@@ -2,10 +2,8 @@ import React, { useCallback } from "react";
 import { useGlobals } from "@storybook/api";
 import { Icons, IconButton } from "@storybook/components";
 import { TOOL_ID } from "./constants";
-
 export const Tool = () => {
   const [{ myAddon }, updateGlobals] = useGlobals();
-
   const toggleMyTool = useCallback(
     () =>
       updateGlobals({
@@ -13,7 +11,6 @@ export const Tool = () => {
       }),
     [myAddon]
   );
-
   return (
     <IconButton
       key={TOOL_ID}
@@ -22,8 +19,8 @@ export const Tool = () => {
       onClick={toggleMyTool}
     >
       {/*
-        Checkout https://next--storybookjs.netlify.app/official-storybook/?path=/story/basics-icon--labels
-        for the full list of icons
+       Checkout https://next--storybookjs.netlify.app/official-storybook/?path=/story/basics-icon--labels
+       for the full list of icons
       */}
       <Icons icon="lightning" />
     </IconButton>
