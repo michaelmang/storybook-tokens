@@ -1,17 +1,17 @@
 {
-  "name": "storybook-addon-kit",
-  "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "name": "storybook-tokens",
+  "version": "1.0.0",
+  "description": "An addon for extracting Style Dictionary-friendly design tokens from a story.",
   "keywords": [
     "storybook-addons",
-    "style",
-    "test"
+    "style-dictionary",
+    "design-tokens"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/michaelmang/storybook-tokens"
   },
-  "author": "winkerVSbecks",
+  "author": "michaelmang",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -83,13 +83,17 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Addon Kit",
+    "displayName": "Design Tokens",
+    "author": "michaelmang",
+    "description": "Extract Style Dictionary-friendly design tokens from a story",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/michaelmang/storybook-tokens"
+    },
     "supportedFrameworks": [
-      "react",
-      "vue",
-      "angular"
+      "react"
     ],
-    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+    "icon": "https://res.cloudinary.com/dpzpn0xkz/image/upload/v1637017186/stpjgu22njaarsxvffbc.png"
   },
   "dependencies": {
     "component-css-extractor": "^1.0.0",
