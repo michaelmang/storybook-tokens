@@ -1,6 +1,6 @@
 {
   "name": "storybook-tokens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An addon for extracting Style Dictionary-friendly design tokens from a story.",
   "keywords": [
     "storybook-addons",
